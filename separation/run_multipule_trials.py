@@ -24,7 +24,7 @@ batch_size = 50
 data_size = 1000
 #data_size = 500
 n_epochs = 200
-#lambda_I = 0.005 # regularization parameter for MINE
+lambda_I = 0.005 # regularization parameter for MINE
 lambda_L2 = 0.0001 # L2 regularization parameter for GRU
 lambda_L2_output = 0.0001 # L2 regularization parameter for output layer
 # weaker regularization
