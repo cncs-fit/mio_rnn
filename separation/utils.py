@@ -256,13 +256,13 @@ def community_analysis(W):
                             node_color=colors_51_100, node_shape='^', node_size=node_size) #type:ignore
 
 
-    # Labels
-    nx.draw_networkx_labels(G, pos=pos, font_size=8)
+    # Labels (disabled: do not show node numbers)
+    # nx.draw_networkx_labels(G, pos=pos, font_size=8)
 
     # plt.title('Network Visualization\n(Circles: nodes 1-50, Triangles: nodes 51-100)\n(Top 30% edges by weight)')
     plt.axis('off')
     plt.tight_layout()
-    plt.show()
+    # plt.show()
 
 
     from sklearn.metrics import  normalized_mutual_info_score

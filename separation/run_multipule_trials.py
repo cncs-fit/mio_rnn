@@ -28,8 +28,8 @@ lambda_I = 0.005 # regularization parameter for MINE
 lambda_L2 = 0.0001 # L2 regularization parameter for GRU
 lambda_L2_output = 0.0001 # L2 regularization parameter for output layer
 # weaker regularization
-# lambda_L2 = 0.00001 # L2 regularization parameter for GRU
-# lambda_L2_output = 0.00001 # L2 regularization parameter for output layer
+lambda_L2 = 0.00001 # L2 regularization parameter for GRU
+lambda_L2_output = 0.00001 # L2 regularization parameter for output layer
 
 s_mine = 0.05
 trial_number_offset = 0

@@ -158,14 +158,18 @@ def analyze_results(model,
   fig, axs = plt.subplots(3, 2, figsize=(15, 10))
   # set legend font size
   plt.rcParams.update({'legend.fontsize': 14})
+  xyz = ['x', 'y', 'z']
   for i in range(3):
       axs[i, 0].plot(np.arange(pl_st, pl_ed+1),
-                    np.array(y_pred_test[0,pl_st:(pl_ed+1),i]), label='prediction',
+                    np.array(y_pred_test[0,pl_st:(pl_ed+1),i]), label='Prediction',
                     color=color_predict, linestyle=linestyle_predict)
       axs[i, 0].plot(np.arange(pl_st, pl_ed+1),
-                    np.array(y_test_batch[0,pl_st:(pl_ed+1),i]), label='target',
+                    np.array(y_test_batch[0,pl_st:(pl_ed+1),i]), label='Target',
                     color=color_target, linestyle=linestyle_target)
       axs[i, 0].legend()
+      axs[i,0].set_xlabel('Time steps')
+      axs[i, 0].set_ylabel(xyz[i])
+
       axs[i, 1].plot(np.arange(pl_st, pl_ed+1),
                     np.array(y_pred_test[0,pl_st:(pl_ed+1),i+3]), label='prediction',
                     color=color_predict, linestyle=linestyle_predict)
@@ -173,6 +177,9 @@ def analyze_results(model,
                     np.array(y_test_batch[0,pl_st:(pl_ed+1),i+3]), label='target',
                     color=color_target, linestyle=linestyle_target)
       axs[i, 1].legend()
+      axs[i,1].set_xlabel('Time steps')
+      axs[i, 1].set_ylabel(xyz[i])
+
   fig.savefig(os.path.join(fig_dir, 'pred_vs_target.png'),bbox_inches="tight")
   fig.savefig(os.path.join(fig_dir, 'pred_vs_target.pdf'),bbox_inches="tight")
   plt.show()
@@ -181,11 +188,11 @@ def analyze_results(model,
   # figures for Q_cors and Q_strs
   plt.rcParams.update({'legend.fontsize': 18})
   fig, ax = plt.subplots(1, 1, figsize=(10, 5))
-  ax.plot(np.arange(len(stats['Q_cors'])), stats['Q_cors'], label='Q_cor',
+  ax.plot(np.arange(len(stats['Q_cors'])), stats['Q_cors'], label=r'$Q_{\mathrm{cor}}$',
             color='red', linestyle='solid')
-  ax.plot(np.arange(len(stats['Q_strs'])), stats['Q_strs'], label='Q_str',
+  ax.plot(np.arange(len(stats['Q_strs'])), stats['Q_strs'], label=r'$Q_{\mathrm{str}}$',
             color='blue', linestyle='dashed')
-  ax.set_xlabel(f'iteration (x{step_per_epoch})')
+  ax.set_xlabel(f'Iteration (x{step_per_epoch})')
   ax.set_ylabel('Modularity')
   ax.legend()
   fig.savefig(os.path.join(fig_dir, 'Q_cors_Q_strs.png'),bbox_inches="tight")
@@ -193,12 +200,12 @@ def analyze_results(model,
 
   # figure for D_outs and D_cors
   fig, ax = plt.subplots(1, 1, figsize=(10, 5))
-  ax.plot(np.arange(len(stats['D_cors'])), stats['D_cors'], label='D_cor',
+  ax.plot(np.arange(len(stats['D_cors'])), stats['D_cors'], label=r'$D_{\mathrm{cor}}$',
             color='red', linestyle='solid')
-  ax.plot(np.arange(len(stats['D_outs'])), stats['D_outs'], label='D_out',
+  ax.plot(np.arange(len(stats['D_outs'])), stats['D_outs'], label=r'$D_{\mathrm{out}}$',
             color='#984ea3', linestyle='dashed')
-  ax.set_xlabel(f'iteration (x{step_per_epoch})')
-  ax.set_ylabel('Separation Index')
+  ax.set_xlabel(f'Iteration (x{step_per_epoch})')
+  ax.set_ylabel('Separation index')
   ax.legend()
   fig.savefig(os.path.join(fig_dir, 'D_outs_D_cors.png'),bbox_inches="tight")
   fig.savefig(os.path.join(fig_dir, 'D_outs_D_cors.pdf'),bbox_inches="tight")
@@ -210,8 +217,8 @@ def analyze_results(model,
   fig, ax = plt.subplots(1, 1, figsize=(10, 5))
   for i in range(6):
       ax.plot(np.arange(R2s.shape[1]), R2s[i], label=labels[i])
-  ax.set_xlabel(f'iteration (x{step_per_epoch})')
-  ax.set_ylabel('R^2')
+  ax.set_xlabel(f'Iteration (x{step_per_epoch})')
+  ax.set_ylabel(r'$R^2$')
   ax.legend()
   fig.savefig(os.path.join(fig_dir, 'R2_scores.png'),bbox_inches="tight")
   fig.savefig(os.path.join(fig_dir, 'R2_scores.pdf'),bbox_inches="tight")
@@ -224,7 +231,7 @@ def analyze_results(model,
   fig, ax = plt.subplots(1, 1, figsize=(8, 3))
   im = ax.imshow(a_w_out.T, cmap='Blues', aspect='auto')
   ax.set_yticks(np.arange(0,6), labels=['Lx', 'Ly', 'Lz', 'Rx', 'Ry', 'Rz'])
-
+  ax.set_xlabel('Neuron index')
   fig.savefig(os.path.join(fig_dir, 'output_weights.png'),bbox_inches="tight")
   fig.savefig(os.path.join(fig_dir, 'output_weights.pdf'),bbox_inches="tight")
 
@@ -237,6 +244,8 @@ def analyze_results(model,
   im = ax.imshow(aU, cmap='Blues', aspect='auto')
   # ax.set_title('Recurrent Weights')
   # set aspect ratio to be equal
+  ax.set_xlabel('Neuron index')
+  ax.set_ylabel('Neuron index')
   ax.set_aspect('equal')
   # fig.colorbar(im, ax=ax, orientation='vertical')
   fig.savefig(os.path.join(fig_dir, 'recurrent_weights.png'),bbox_inches="tight")
@@ -268,8 +277,8 @@ def analyze_results(model,
   ax.set_xlim(limits) # type:ignore
   ax.set_ylim(limits) #type:ignore
   ax.legend()
-  ax.set_xlabel('Mean Correlation with Target 1')
-  ax.set_ylabel('Mean Correlation with Target 2')
+  ax.set_xlabel('Mean correlation with target 1')
+  ax.set_ylabel('Mean correlation with target 2')
   #ax.set_title('Neuron-Target Correlation')
   fig.savefig(os.path.join(fig_dir, 'neuron_target_correlation.png'),bbox_inches="tight")
   fig.savefig(os.path.join(fig_dir, 'neuron_target_correlation.pdf'),bbox_inches="tight")
@@ -290,7 +299,9 @@ def analyze_results(model,
   fig.colorbar(im, ax=ax, orientation='vertical')
   # ax.set_title('Correlation Matrix of Hidden States')
   ax.set_aspect('equal')
-
+  ax.set_xlabel('Neuron index')
+  ax.set_ylabel('Neuron index')
+  # save the figure
   fig.savefig(os.path.join(fig_dir, 'correlation_matrix.png'),bbox_inches="tight")
   fig.savefig(os.path.join(fig_dir, 'correlation_matrix.pdf'),bbox_inches="tight")
  
@@ -363,7 +374,7 @@ if __name__ == "__main__":
   dummy_input = np.random.rand(1, 10000, 3).astype(np.float32) 
   model(dummy_input)  # initialize the model
   mymine = MINE_calculator()
-
+  #%%
   # load test data
   data1_test = np.load(os.path.join(chaos_signals_dir, 'data1_120.npy'))
   data2_test = np.load(os.path.join(chaos_signals_dir, 'data2_120.npy'))

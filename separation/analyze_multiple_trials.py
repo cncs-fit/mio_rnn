@@ -24,7 +24,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
 
-n_trials = 20
+n_trials = 5
 
 data_size = 1000
 batch_size = 50
