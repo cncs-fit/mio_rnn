@@ -1,8 +1,8 @@
 # mio_rnn
-codes for the paper entitled "Emergence of Functionally Differentiated Structures via Mutual Information Optimization in Recurrent Neural Networks"
+codes for the paper entitled "Emergence of Functionally Differentiated Structures via Mutual Information Optimization in Recurrent Neural Networks" by Y. Tomoda, I. Tsuda, and Y. Yamaguti (2026) Cognitive Neurodynamics, 20, 5
 
-The arxiv link is https://arxiv.org/abs/2507.12858
-
+ https://doi.org/10.1007/s11571-025-10377-0
+ 
 Two directories are provided:
 - `wm`: the  code for working memory tasks
 - `separation`: the code for chaotic separation separation tasks
@@ -13,11 +13,8 @@ Two directories are provided:
 If you use this code, please cite the following paper:
 
 ```
-@article{mio_rnn,
-  title={Emergence of Functionally Differentiated Structures via Mutual Information Optimization in Recurrent Neural Networks},
-  author={Yuki Tomoda, Ichiro Tsuda, and Yutaka Yamaguti},
-   journal={arXiv preprint arXiv:2507.12858},
-  year={2025}
-}
+Tomoda, Y., Tsuda, I. & Yamaguti, Y. Emergence of functionally differentiated structures via mutual information minimization in recurrent neural networks. Cogn Neurodyn 20, 5 (2026). https://doi.org/10.1007/s11571-025-10377-0
 ```
+
+
 
